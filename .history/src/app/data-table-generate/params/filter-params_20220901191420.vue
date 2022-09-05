@@ -74,6 +74,7 @@ export default {
   watch: {
     params: {
       handler(nv) {
+        debugger
         this.formData = nv;
       },
       deep: true,
