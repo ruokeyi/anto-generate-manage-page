@@ -1,0 +1,380 @@
+@import "reset.styl"
+
+html, body {
+  color: var(--theme-dark)
+  background-color rgba(230, 230, 230, 1)
+}
+
+c1 = saturate(rgba(192, 202, 214, .1), 80%)
+c2 = saturate(rgba(235, 206, 208, 1), 80%)
+c3 = saturate(rgba(216, 202, 175, .1), 80%)
+
+div.el-message {
+  z-index: 99999 !important
+}
+
+.ContentLayout {
+  display: flex
+  align-items: center
+  flex-direction: column
+  padding: 12px
+  min-width 1440px;
+  overflow-y scroll
+
+  >.content {
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 20px;
+    margin: 40px 0
+    box-shadow: 0 0 6px rgba(0, 0, 0, .2);
+    width: 980px
+    min-width 980px
+    max-width 1300px
+
+    & > .list-item {
+      margin-top: 8px
+      border-bottom: 1px solid var(--theme-lighter)
+      //border-image linear-gradient(to right, c1, c2, c3) 10 10
+
+
+      &:last-child {
+        border: 0
+      }
+
+    }
+  }
+}
+
+
+.XnListItem .ListItemCard {
+  margin-left: 20px;
+  word-break: break-all;
+}
+
+.XnListItem {
+  display: flex;
+  padding-bottom: 8px;
+}
+
+.font-color-dark {
+  color: var(--theme-dark)
+}
+
+.font-color-light {
+  color: var(--theme-light)
+}
+
+.xn {
+  &.pointer {
+    cursor pointer
+  }
+
+  &.bg {
+    &.primary {
+      background: var(--theme-primary)
+    }
+
+    &.sub {
+      background: var(--theme-sub)
+    }
+
+    &.info {
+      background: var(--theme-info)
+    }
+
+    &.lighter {
+      background var(--theme-lighter)
+    }
+  }
+
+  &.pd {
+
+    &.pd0 {
+      padding: 0
+    }
+
+    &.all {
+      &.pds {
+        padding var(--pd-sm)
+      }
+
+      &.pdn {
+        padding var(--pd-n)
+      }
+
+      &.pdl {
+        padding var(--pd-l)
+      }
+
+      &.pdh {
+        padding var(--pd-h)
+      }
+    }
+
+    &.top {
+      &.pds {
+        padding-top var(--pd-sm)
+      }
+
+      &.pdn {
+        padding-top var(--pd-n)
+      }
+
+      &.pdl {
+        padding-top var(--pd-l)
+      }
+
+      &.pdh {
+        padding-top var(--pd-h)
+      }
+    }
+
+    &.left {
+      &.pds {
+        padding-left var(--pd-sm)
+      }
+
+      &.pdn {
+        padding-left var(--pd-n)
+      }
+
+      &.pdl {
+        padding-left var(--pd-l)
+      }
+
+      &.pdh {
+        padding-left var(--pd-h)
+      }
+    }
+
+    &.right {
+      &.pds {
+        padding-right var(--pd-sm)
+      }
+
+      &.pdn {
+        padding-right var(--pd-n)
+      }
+
+      &.pdl {
+        padding-right var(--pd-l)
+      }
+
+      &.pdh {
+        padding-right var(--pd-h)
+      }
+    }
+
+    &.bottom {
+      &.pds {
+        padding-bottom var(--pd-sm)
+      }
+
+      &.pdn {
+        padding-bottom var(--pd-n)
+      }
+
+      &.pdl {
+        padding-bottom var(--pd-l)
+      }
+
+      &.pdh {
+        padding-bottom var(--pd-h)
+      }
+    }
+  }
+
+  &.mg {
+    &.mg0 {
+      margin: 0
+    }
+
+    &.all {
+      &.mgs {
+        margin var(--mg-sm)
+      }
+
+      &.mgn {
+        margin var(--mg-n)
+      }
+
+      &.mgl {
+        margin var(--mg-l)
+      }
+
+      &.mgh {
+        margin var(--mg-h)
+      }
+    }
+
+    &.top {
+      &.mgs {
+        margin-top var(--mg-sm)
+      }
+
+      &.mgn {
+        margin-top var(--mg-n)
+      }
+
+      &.mgl {
+        margin-top var(--mg-l)
+      }
+
+      &.mgh {
+        margin-top var(--mg-h)
+      }
+    }
+
+    &.left {
+      &.mgs {
+        margin-left var(--mg-sm)
+      }
+
+      &.mgn {
+        margin-left var(--mg-n)
+      }
+
+      &.mgl {
+        margin-left var(--mg-l)
+      }
+
+      &.mgh {
+        margin-left var(--mg-h)
+      }
+    }
+
+    &.right {
+      &.mgs {
+        margin-right var(--mg-sm)
+      }
+
+      &.mgn {
+        margin-right var(--mg-n)
+      }
+
+      &.mgl {
+        margin-right var(--mg-l)
+      }
+
+      &.mgh {
+        margin-right var(--mg-h)
+      }
+    }
+
+    &.bottom {
+      &.mgs {
+        margin-bottom var(--mg-sm)
+      }
+
+      &.mgn {
+        margin-bottom var(--mg-n)
+      }
+
+      &.mgl {
+        margin-bottom var(--mg-l)
+      }
+
+      &.mgh {
+        margin-bottom var(--mg-h)
+      }
+    }
+  }
+
+  &.weight-1 {
+    flex-grow 1
+  }
+
+  &.flex {
+    display: flex
+
+    &.fww {
+      flex-wrap wrap
+    }
+
+    &.aic {
+      align-items center
+    }
+
+    &.jcc {
+      justify-content: center
+    }
+
+    &.jcfe {
+      justify-content: flex-end
+    }
+
+    &.fdc {
+      flex-direction column
+    }
+
+
+  }
+
+  &.text {
+    font-size: 14px
+    color var(--theme-dark)
+
+    &.lighter {
+      color var(--theme-normal)
+    }
+
+    &.ovfe {
+      overflow: hidden
+      text-overflow ellipsis
+      white-space nowrap
+      word-break break-all
+    }
+
+    &.sub {
+      font-size: 12px
+      color var(--theme-normal)
+
+      &.darker {
+        color var(--theme-dark)
+      }
+
+      &.lighter {
+        color var(--theme-light)
+      }
+    }
+
+    &.txtc-primary {
+      color var(--theme-primary)
+    }
+
+    &.txtc-sub {
+      color var(--theme-sub)
+    }
+
+    &.txtc-info {
+      color var(--theme-info)
+    }
+
+    &.txtc-lighter {
+      color var(--theme-lighter)
+    }
+
+  }
+
+  &.link {
+    color var(--theme-primary)
+  }
+
+  &.title {
+    font-size: 16px
+    font-weight bold
+
+    &.small {
+      font-size: 14px
+    }
+
+    &.large {
+      font-size: 20px
+    }
+  }
+}
+
+.xn > .el-dialog__body {
+  padding: var(--pd-h)
+  padding-top: var(--pd-l)
+}
