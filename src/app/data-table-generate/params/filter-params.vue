@@ -36,7 +36,7 @@
       </el-form-item>
     </div>
     <div v-if="areaType === 'dataTable'">
-      <data-table-params :params="formData" @updateParams="updateParams" />
+      <data-table-params v-model:params="formData" @updateParams="updateParams" />
     </div>
     <div v-if="areaType === 'func'">
       <func-params :params="formData" @updateParams="updateParams" />

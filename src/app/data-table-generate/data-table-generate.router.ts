@@ -1,7 +1,7 @@
 export const dataTableRouterConfig = [
   {
-    name: 'data-table-generate',
-    path: '/data-table-generate',
+    name: 'generator',
+    path: '/generator',
     component: () => import('./index.vue'),
   },
 ];
