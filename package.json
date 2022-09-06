@@ -1,5 +1,5 @@
 {
-  "name": "data-table-demo",
+  "name": "generate-data-table",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",

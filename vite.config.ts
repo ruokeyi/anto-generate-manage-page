@@ -24,7 +24,7 @@ const isUat = process.env.DEPLOY_ENV === 'uat';
 const isProd = process.env.DEPLOY_ENV === 'prod';
 // @ts-ignore
 const isPre = process.env.DEPLOY_ENV === 'pre';
-export let projectName = 'data-table-demo';
+export let projectName = 'generate-data-table';
 let prefix = isUat
   ? 'uat-'
   : '';
