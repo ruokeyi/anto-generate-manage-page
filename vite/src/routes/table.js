@@ -1,12 +1,11 @@
-// /routes/users.js
- 
+// /routes/table.js
 const Router = require('koa-router')
-const tableRouter = new Router({ //配置路由前缀为table的路由
+const tableRouter = new Router({ // 配置路由前缀为table的路由
     prefix: '/table'
 })
-const {generateTable, getTable}=require('../controllers/table.js')
+const { generateTable, getTableComponent }=require('../controllers/table.js')
  
-tableRouter.get('/', getTable)
+tableRouter.get('/copy', getTableComponent)
 tableRouter.post('/', generateTable)
  
 module.exports=tableRouter

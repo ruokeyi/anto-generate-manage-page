@@ -1,6 +1,6 @@
 <template>
   <div class="fr">
-    <div style="width: 80%;">
+    <div style="width: 80%">
       <div class="nav-index fr"></div>
       <el-form
         class="form-wrapper fr-wrap"
@@ -265,7 +265,27 @@
           /></el-icon>
         </el-form-item>
       </el-form>
-      <span>API相关</span>
+      <span class="mgt20 crm-txtc-primary">API相关</span>
+      <div class="fr ac form-wrapper">
+        接口基础路径填写
+          <el-radio-group v-model="useApiPath" size="small">
+            <el-radio :label="1">开启</el-radio>
+            <el-radio :label="2">关闭</el-radio>
+          </el-radio-group>
+          <el-input
+            size="small"
+            v-if="useApiPath === 1"
+            class="mg12"
+            placeholder="接口基础路径"
+            v-model="apiPath"
+          />
+          <small v-if="useApiPath === 1" class="crm-txtc-emphasis"
+            >注意：若开启接口基础路径填写，api拼接规则为${接口基础路径}${获取列表API}</small
+          >
+          <small v-if="useApiPath === 2" class="crm-txtc-emphasis"
+            >当前已关闭接口基础路径填写，以下api都必须填写完整bapi接口路径，如：/x/admin/crm-components/datatable/list</small
+          >
+        </div>
       <el-form
         class="fr-wrap form-wrapper"
         v-model="api"
@@ -285,18 +305,22 @@
     <div style="width: 20%; padding-left: 20px">
       <el-button-group size="small">
         <el-button @click="$emit('preView')">预览</el-button>
+         <el-button @click="$emit('copyComponent')" type=""
+          >复制组件</el-button
+        >
         <el-button @click="$emit('exportCode')" type="primary"
           >导出代码</el-button
         >
       </el-button-group>
       <div
         style="
-          margin-top: 20px;
           border: 1px dashed #c0bdbd;
           border-radius: 12px;
-          height: 60%;
+          position: fixed;
+          top: 172px;
         "
       >
+        <span class="mg12 crm-txtc-primary">配置参数面板</span>
         <empty-state
           v-if="!currentParam"
           :width="'200px'"
@@ -312,86 +336,82 @@
         />
       </div>
     </div>
-     <el-dialog
-        v-model="operationDialogShow"
-        width="80%"
-        @close="handleOperationDialogShowClose"
-      >
-        <div>
-          <el-table :data="pieceOpArr" size="small">
-            <el-table-column prop="key" label="按钮key" width="120">
-              <template #default="scope">
-                <el-select v-model="scope.row.key" @change="checkSelect">
-                  <el-option
-                    v-for="k in operationKeyOptions"
-                    :key="k"
-                    :label="k"
-                    :value="k"
-                    :disabled="checkSelect(k)"
-                  />
-                </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column prop="label" label="按钮文字说明" width="180">
-              <template #default="scope">
-                <el-input v-model="scope.row.label" />
-              </template>
-            </el-table-column>
-            <el-table-column prop="type" label="按钮类型" width="100">
-              <template #default="scope">
-                <el-select v-model="scope.row.type">
-                  <el-option label="图标" value="icon" />
-                  <el-option label="文字" value="text" />
-                </el-select>
-              </template>
-            </el-table-column>
-            <el-table-column prop="auth_key" label="权限点" width="180">
-              <template #default="scope">
-                <el-input v-model="scope.row.auth_key" />
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="auth_key"
-              label="二次确认组件文案"
-              width="180"
-            >
-              <template #default="scope">
-                <el-input
-                  v-model="scope.row.confirmText"
-                  placeholder="一般在删除操作时使用"
+    <el-dialog
+      v-model="operationDialogShow"
+      width="80%"
+      @close="handleOperationDialogShowClose"
+    >
+      <div>
+        <el-table :data="pieceOpArr" size="small">
+          <el-table-column prop="key" label="按钮key" width="120">
+            <template #default="scope">
+              <el-select v-model="scope.row.key" @change="checkSelect">
+                <el-option
+                  v-for="k in operationKeyOptions"
+                  :key="k"
+                  :label="k"
+                  :value="k"
+                  :disabled="checkSelect(k)"
                 />
-              </template>
-            </el-table-column>
-            <el-table-column
-              prop="format_params"
-              label="参数处理函数"
-              width="180"
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column prop="label" label="按钮文字说明" width="180">
+            <template #default="scope">
+              <el-input v-model="scope.row.label" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="type" label="按钮类型" width="100">
+            <template #default="scope">
+              <el-select v-model="scope.row.type">
+                <el-option label="图标" value="icon" />
+                <el-option label="文字" value="text" />
+              </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column prop="auth_key" label="权限点" width="180">
+            <template #default="scope">
+              <el-input v-model="scope.row.auth_key" />
+            </template>
+          </el-table-column>
+          <el-table-column prop="auth_key" label="二次确认组件文案" width="180">
+            <template #default="scope">
+              <el-input
+                v-model="scope.row.confirmText"
+                placeholder="一般在删除操作时使用"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="format_params"
+            label="参数处理函数"
+            width="180"
+          >
+            <template #default="scope">
+              <el-input
+                type="textarea"
+                v-model="scope.row.format_params"
+                placeholder="一般在删除操作时使用"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" min-width="80">
+            <el-button @click="addOperation(index)">+</el-button>
+            <el-button
+              @click="deleteOperation(index)"
+              v-if="pieceOpArr.length > 0"
+              >-</el-button
             >
-              <template #default="scope">
-                <el-input
-                  type="textarea"
-                  v-model="scope.row.format_params"
-                  placeholder="一般在删除操作时使用"
-                />
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" min-width="80">
-              <el-button @click="addOperation(index)">+</el-button>
-              <el-button
-                @click="deleteOperation(index)"
-                v-if="pieceOpArr.length > 0"
-                >-</el-button
-              >
-            </el-table-column>
-          </el-table>
-          <span class="footer">
-            <el-button @click="confirmAdd" class="mgl20" type="primary"
-              >确认</el-button
-            >
-            <el-button @click="handleOperationDialogShowClose">取消</el-button>
-          </span>
-        </div>
-      </el-dialog>
+          </el-table-column>
+        </el-table>
+        <span class="footer">
+          <el-button @click="confirmAdd" class="mgl20" type="primary"
+            >确认</el-button
+          >
+          <el-button @click="handleOperationDialogShowClose">取消</el-button>
+        </span>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -417,7 +437,7 @@ import CodeMirror from "./components/codemirror-input.vue";
 import EmptyState from "@/components/EmptyState.vue";
 
 import { ref } from "vue";
-import { cloneDeep } from 'lodash-es';
+import { cloneDeep } from "lodash-es";
 const toolbarItem = {
   type: "",
   label: "",
@@ -444,7 +464,7 @@ const dialogItem = {
   componentRender: null,
   options: [],
   html: null,
-  disableDate:null,
+  disableDate: null,
 };
 const tp = {
   key: "createItem", //默认为新建
@@ -471,6 +491,7 @@ export default {
     "foldMenu",
     "preView",
     "exportCode",
+    "copyComponent",
     "updateApiForm",
   ],
   components: {
@@ -553,7 +574,7 @@ export default {
     const currentItemType = ref("");
     const currentParam = ref(null);
     const updateBaseParams = (p) => {
-      currentParam.value = p
+      currentParam.value = p;
       switch (currentAreaType.value) {
         case "toolbar":
           necessaryConfigForm.value.toolbarConf[currentIndex.value] = p;
@@ -569,12 +590,12 @@ export default {
           break;
       }
     };
-  const openRightPanelMethod =(obj, area_type)=> {
+    const openRightPanelMethod = (obj, area_type) => {
       currentIndex.value = obj.index;
       currentParam.value = obj.item;
       currentAreaType.value = area_type;
       currentItemType.value = obj.eleType;
-    }
+    };
     return {
       currentIndex,
       currentAreaType,
@@ -609,6 +630,8 @@ export default {
       operationKeyOptions,
       pieceOpArr,
       tableCol,
+      apiPath: ref(""),
+      useApiPath: ref(2),
     };
   },
   watch: {
@@ -632,7 +655,20 @@ export default {
     },
     apiForm: {
       handler(nv, ov) {
-        this.$emit("updateApiForm", nv);
+        let pp = nv;
+        if (this.useApiPath === 1) {
+          pp = {
+            ...pp,
+            getListApi: `${this.apiPath}${pp.getListApi}`,
+            createApi: `${this.apiPath}${pp.createApi}`,
+            viewApi: `${this.apiPath}${pp.viewApi}`,
+            updateApi: `${this.apiPath}${pp.updateApi}`,
+            deleteApi: `${this.apiPath}${pp.deleteApi}`,
+            exportListApi: `${this.apiPath}${pp.exportListApi}`,
+            importListApi: `${this.apiPath}${pp.importListApi}`,
+          };
+        }
+        this.$emit("updateApiForm", pp);
       },
       deep: true,
     },
@@ -722,7 +758,7 @@ export default {
         );
         return;
       }
-      const temp = cloneDeep(toolbarItem)
+      const temp = cloneDeep(toolbarItem);
       this.necessaryConfigForm.toolbarConf.push({
         ...temp,
         key: `${json_data.key}${
@@ -742,7 +778,7 @@ export default {
         );
         return;
       }
-      const temp = cloneDeep(dialogItem)
+      const temp = cloneDeep(dialogItem);
       this.necessaryConfigForm.dialogConf.items.push({
         ...temp,
         key: `${json_data.key}${

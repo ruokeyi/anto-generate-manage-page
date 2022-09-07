@@ -51,6 +51,12 @@ export default {
     },
   },
   watch: {
+    params:{
+        handler(nv) {
+          this.formData = nv;
+        },
+        deep: true,
+      },
     formData: {
       handler(nv) {
         this.$emit("updateParams", nv);

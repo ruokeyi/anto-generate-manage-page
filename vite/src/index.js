@@ -14,7 +14,7 @@ app.use(cors({
     return false;
   },
   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-  maxAge: 5,
+  maxAge: 0,
   credentials: true,
   withCredentials:true,
   allowMethods: ['GET', 'POST', 'DELETE'],
@@ -41,6 +41,6 @@ app.use(router.routes())
 app.use(tableRouter.routes())
 app.use(tableRouter.allowedMethods())
  
-app.listen(3000,()=>{
-    console.log('koa server running at http://127.0.0.1:3000')
+app.listen(3012,()=>{
+    console.log('Koa Server running at http://127.0.0.1:3012')
 })

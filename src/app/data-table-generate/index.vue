@@ -10,11 +10,12 @@
             @updateConfigForm="updateConfigForm"
             @updateIsTable="updateIsTable"
             @updateNecessaryConfigForm="updateNecessaryConfigForm"
-            @updateBasciParams="updateBasciParams"
+            @updateBasicForm="updateBasicForm"
             @updateApiForm="updateApiForm"
             @foldMenu="checkFoldMenu"
             @preView="preView"
             @exportCode="exportCode"
+            @copyComponent="copyComponent"
           />
         </div>
       </div>
@@ -80,7 +81,7 @@ export default {
       configs.value = data;
       propObj.value = { ...propObj.value, ...configs.value };
     };
-    const updateBasciParams = (data) => {
+    const updateBasicForm = (data) => {
       propObj.value.pageTitle = data.pageTitle;
       propObj.value.authPoint = data.authPoint;
       propObj.value.exportAuthKey = data.exportAuthKey;
@@ -119,7 +120,7 @@ export default {
       funcList,
       table,
       propObj,
-      updateBasciParams,
+      updateBasicForm,
       updateConfigForm,
       updateNecessaryConfigForm,
       updateIsTable,
@@ -148,20 +149,33 @@ export default {
       this.$router.push({ path: "/table-preview" });
     },
     async exportCode() {
-      // const configObj = {
-      //   toolbarConf: this.propObj.toolbarConf,
-      //   dialogConf: this.propObj.dialogConf,
-      //   listConf: this.propObj.listConf,
-      // };
       const configObj = this.propObj
       const _this = this
        axios
-      .post("http://127.0.0.1:3000/table",{configObj},{
+      .post("http://127.0.0.1:3012/table",{configObj},{
         headers:{
                 'X-Requested-With': 'XMLHttpRequest',
                 "Access-Control-Allow-Origin": "*"
             }
       })
+      .then(function (response) {
+       if(response.data.code===0){
+          _this.$message.success("下载成功，请到桌面查看～");
+       }else{
+          _this.$message.danger("服务器错误，代码导出失败！");
+       }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error)
+      })
+      .then(function () {
+        // always executed
+      })
+    },
+    async copyComponent() {
+      const _this = this
+       axios.get("http://127.0.0.1:3012/table/copy")
       .then(function (response) {
        if(response.data.code===0){
           _this.$message.success("下载成功，请到桌面查看～");

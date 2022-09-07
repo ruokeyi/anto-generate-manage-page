@@ -160,6 +160,10 @@ export const API_PROPS = {
     type: 'String',
     label: '删除API',
   },
+  importListApi: {
+    type: 'String',
+    label: '导入API',
+  },
   exportListApi: {
     type: 'String',
     default: null,
@@ -169,10 +173,6 @@ export const API_PROPS = {
     type: 'String',
     default: "excel",
     label: '导出数据格式',
-  },
-  importListApi: {
-    type: 'String',
-    label: '导入API',
   },
   mockId: {
     type: 'Number',
