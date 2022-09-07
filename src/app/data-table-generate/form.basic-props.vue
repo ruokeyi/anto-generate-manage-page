@@ -305,6 +305,9 @@
     <div style="width: 20%; padding-left: 20px">
       <el-button-group size="small">
         <el-button @click="$emit('preView')">预览</el-button>
+         <el-button @click="$emit('copyComponent')" type=""
+          >复制组件</el-button
+        >
         <el-button @click="$emit('exportCode')" type="primary"
           >导出代码</el-button
         >
@@ -487,6 +490,7 @@ export default {
     "foldMenu",
     "preView",
     "exportCode",
+    "copyComponent",
     "updateApiForm",
   ],
   components: {

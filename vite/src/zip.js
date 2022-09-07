@@ -3,13 +3,11 @@ const archiver = require('archiver');
 const os = require('os');
 const homedir = os.homedir();
 const timeString = new Date().toLocaleDateString().replace(/\//g, '-'); // 日期充当hash值防止覆盖之前的压缩包
-function compress() {
+function compress(target,outputName) {
 
   //配置要打包的路径列表,需要打包某些目录，添加到数组里面即可 相对路径
-  const target = ['table-data']
-  console.log('target:'+target)
   // 默认在桌面生成此文件 table-data+日期.zip
-  const output = fs.createWriteStream(homedir + '/Desktop/table-data' + timeString + '.zip');
+  const output = fs.createWriteStream(homedir + `/Desktop/${outputName}${timeString}.zip`);
   const archive = archiver('zip', {
     zlib: { level: 9 } // 设置压缩级别
   });
