@@ -32,6 +32,8 @@
     </el-form-item>
     <el-form-item v-if="itemType === 'component'" label="自定义组件名称">
       <el-input v-model="formData.componentRender" />
+       <small class="crm-txtc-primary"> 所有用到的组件名称，将会在代码中进行创建，具体内容请在下方填写，多个请用英文逗号分隔</small>
+      <el-input v-model="useComponens" @blur="checkUdfComponents" />
     </el-form-item>
     <el-form-item v-if="itemType === 'html'" label="自定义html">
       <el-input type="textarea" rows="4" v-model="formData.componentRender" />
@@ -39,9 +41,9 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { ref, getCurrentInstance } from "vue";
 export default {
-  emits: ["updateParams"],
+  emits: ["updateParams","updateUdfComps"],
   props: {
     params: {
       type: Object,
@@ -72,9 +74,16 @@ export default {
     const addOption = () => {
       formData.value.options.push({ key: "", value: "" });
     };
+    const useComponens = ref('')
+      const {proxy} = getCurrentInstance()
+      const checkUdfComponents=()=>{
+        proxy.$emit("updateUdfComps", useComponens.value.split(","))
+      }
     return {
       formData,
       addOption,
+      useComponens,
+      checkUdfComponents,
     };
   },
 };

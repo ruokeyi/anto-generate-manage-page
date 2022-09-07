@@ -36,16 +36,17 @@
       </el-form-item>
     </div>
     <div v-if="areaType === 'dataTable'">
-      <data-table-params :params="formData" @updateParams="updateParams" />
+      <data-table-params :params="formData" @updateParams="updateParams"  @updateUdfComps="(arr)=>$emit('updateUdfComps',arr)" />
     </div>
     <div v-if="areaType === 'func'">
-      <func-params :params="formData" @updateParams="updateParams" />
+      <func-params :params="formData" @updateParams="updateParams" @updateUdfComps="(arr)=>$emit('updateUdfComps',arr)" />
     </div>
     <div v-if="areaType === 'dialog'">
       <dialog-params
         :params="formData"
         :itemType="itemType"
         @updateParams="updateParams"
+        @updateUdfComps="(arr)=>$emit('updateUdfComps',arr)"
       />
     </div>
   </el-form>
@@ -56,9 +57,9 @@ import DataTableParams from "./data-table.params.vue";
 import DialogParams from "./dialog.params.vue";
 import FuncParams from "./func.params.vue";
 import ToolbarParams from "./toolbar.params.vue";
-import {cloneDeep} from 'lodash'
+
 export default {
-  emits: ["updateBaseParams"],
+  emits: ["updateBaseParams","updateUdfComps"],
   props: {
     areaType: {
       type: String,
