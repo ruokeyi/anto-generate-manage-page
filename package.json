@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build & node ./vite/bin/entry.js",
     "serve": "vite preview",
-    "start": "vite",
+    "start": "vite & node ./vite/bin/entry.js",
     "server": "node ./vite/bin/entry.js"
   },
   "dependencies": {
