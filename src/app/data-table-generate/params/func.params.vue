@@ -31,11 +31,18 @@
         placeholder="默认开放，无权限控制"
       />
     </el-form-item>
-    <el-form-item label="按钮点击对应的回调组件">
+    <el-form-item label="按钮点击对应的回调函数">
       <el-input
         v-model="formData.componentRender"
+        type="textarea"
         placeholder="如不填写，默认为系统弹框事件"
       />
+      <small class="crm-txtc-emphasis">如：(row)=>{</small>
+      <small class="crm-txtc-emphasis">if(row.state===1){return Test1}</small>
+      <small class="crm-txtc-emphasis">else{return Test2}</small>
+      <small class="crm-txtc-emphasis">}</small>
+      <small class="crm-txtc-primary"> 所有用到的组件名称，将会在代码中进行创建，具体内容请在下方填写，多个请用英文逗号分隔</small>
+      <el-input v-model="useComponens" @blur="checkUdfComponents" />
     </el-form-item>
     <!-- todo确认是否为无效参数 -->
     <el-form-item label="按钮对应事件名称">
@@ -44,9 +51,9 @@
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { getCurrentInstance, ref } from "vue";
 export default {
-    emits: ["updateParams"],
+    emits: ["updateParams","updateUdfComps"],
     props: {
       params: {
         type: Object,
@@ -74,8 +81,15 @@ export default {
       const addOption = () => {
         formData.value.options.push({ key: "", value: "" });
       };
+       const useComponens = ref('')
+      const {proxy} = getCurrentInstance()
+      const checkUdfComponents=()=>{
+        proxy.$emit("updateUdfComps", useComponens.value.split(","))
+      }
       return {
         formData,
+        useComponens,
+        checkUdfComponents,
         addOption,
       };
     },

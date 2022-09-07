@@ -1,7 +1,14 @@
 const fs = require('fs')
 function transData(conf){
   const obj = JSON.parse(conf).configObj
-  let temp = "export const conf = {"
+  const components = JSON.parse(conf).components
+  let temp = ''
+  if(components.length>0){
+    components.map(com=>{
+      temp+=`import ${com} from './components/${com}'\n`
+    })
+  }
+  temp += "\nexport const conf = {\n"
   Object.keys(obj).map(o=>{
     temp+=` ${o} = ${JSON.stringify(obj[o])},\n`
   })
@@ -56,5 +63,16 @@ function createFile(data) {
     }
     console.log('文件写入成功')
   })
+  const components = JSON.parse(data).components
+if(components.length>0){
+  fs.mkdirSync('table-data/components')
+  components.map(co=>{
+    fs.writeFile(`table-data/components/${co}.vue`, '<template>\n</template>\n<script>\n</script>\n<style>\n</style>', 'utf8', (err) => {
+      if (err) {
+        throw err
+      }
+    })
+  })
+}
 }
 module.exports = createFile

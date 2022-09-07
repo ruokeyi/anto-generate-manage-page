@@ -268,24 +268,24 @@
       <span class="mgt20 crm-txtc-primary">API相关</span>
       <div class="fr ac form-wrapper">
         接口基础路径填写
-          <el-radio-group v-model="useApiPath" size="small">
-            <el-radio :label="1">开启</el-radio>
-            <el-radio :label="2">关闭</el-radio>
-          </el-radio-group>
-          <el-input
-            size="small"
-            v-if="useApiPath === 1"
-            class="mg12"
-            placeholder="接口基础路径"
-            v-model="apiPath"
-          />
-          <small v-if="useApiPath === 1" class="crm-txtc-emphasis"
-            >注意：若开启接口基础路径填写，api拼接规则为${接口基础路径}${获取列表API}</small
-          >
-          <small v-if="useApiPath === 2" class="crm-txtc-emphasis"
-            >当前已关闭接口基础路径填写，以下api都必须填写完整bapi接口路径，如：/x/admin/crm-components/datatable/list</small
-          >
-        </div>
+        <el-radio-group v-model="useApiPath" size="small">
+          <el-radio :label="1">开启</el-radio>
+          <el-radio :label="2">关闭</el-radio>
+        </el-radio-group>
+        <el-input
+          size="small"
+          v-if="useApiPath === 1"
+          class="mg12"
+          placeholder="接口基础路径"
+          v-model="apiPath"
+        />
+        <small v-if="useApiPath === 1" class="crm-txtc-emphasis"
+          >注意：若开启接口基础路径填写，api拼接规则为${接口基础路径}${获取列表API}</small
+        >
+        <small v-if="useApiPath === 2" class="crm-txtc-emphasis"
+          >当前已关闭接口基础路径填写，以下api都必须填写完整bapi接口路径，如：/x/admin/crm-components/datatable/list</small
+        >
+      </div>
       <el-form
         class="fr-wrap form-wrapper"
         v-model="api"
@@ -305,9 +305,7 @@
     <div style="width: 20%; padding-left: 20px">
       <el-button-group size="small">
         <el-button @click="$emit('preView')">预览</el-button>
-         <el-button @click="$emit('copyComponent')" type=""
-          >复制组件</el-button
-        >
+        <el-button @click="$emit('copyComponent')" type="">复制组件</el-button>
         <el-button @click="$emit('exportCode')" type="primary"
           >导出代码</el-button
         >
@@ -333,6 +331,7 @@
           :area-type="currentAreaType"
           :item-type="currentItemType"
           @updateBaseParams="updateBaseParams"
+          @updateUdfComps="test"
         />
       </div>
     </div>
@@ -493,6 +492,7 @@ export default {
     "exportCode",
     "copyComponent",
     "updateApiForm",
+    "updateUdfComponents",
   ],
   components: {
     Dragable,
@@ -721,6 +721,12 @@ export default {
     },
   },
   methods: {
+    test(arr) {
+      this.$emit("updateUdfComponents", {
+        arr: arr,
+        type: this.currentAreaType,
+      });
+    },
     checkSelect(e) {
       let flag = false;
       this.pieceOpArr.map((p) => {

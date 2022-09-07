@@ -31,13 +31,15 @@
         v-model="formData.render"
         placeholder="列字段展示的回调处理函数，若选择component/html类型，必填render函数"
       />
+      <small class="crm-txtc-primary"> 所有用到的组件名称，将会在代码中进行创建，具体内容请在下方填写，多个请用英文逗号分隔</small>
+      <el-input v-model="useComponens" @blur="checkUdfComponents" />
     </el-form-item>
   </div>
 </template>
 <script>
-import { ref } from "vue";
+import { ref,getCurrentInstance } from "vue";
 export default {
-    emits: ["updateParams"],
+    emits: ["updateParams","updateUdfComps"],
     props: {
       params: {
         type: Object,
@@ -65,8 +67,15 @@ export default {
       const addOption = () => {
         formData.value.options.push({ key: "", value: "" });
       };
+       const useComponens = ref('')
+      const {proxy} = getCurrentInstance()
+      const checkUdfComponents=()=>{
+        proxy.$emit("updateUdfComps", useComponens.value.split(","))
+      }
       return {
         formData,
+        useComponens,
+        checkUdfComponents,
         addOption,
       };
     },

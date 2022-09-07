@@ -12,6 +12,7 @@
             @updateNecessaryConfigForm="updateNecessaryConfigForm"
             @updateBasicForm="updateBasicForm"
             @updateApiForm="updateApiForm"
+            @updateUdfComponents="updateUdfComponents"
             @foldMenu="checkFoldMenu"
             @preView="preView"
             @exportCode="exportCode"
@@ -114,7 +115,13 @@ export default {
     const toolbarList = ref([]);
     const funcList = ref([]);
     const table = ref([]);
+    //所有自定义的组件名称，将会生成对应目录，并且在生成代码时在config.jsx中引入对应的组件
+    const udfComponents = ref({func:[],dataTable:[],dialog:[]})
+    const updateUdfComponents = ({arr,type})=>{
+      udfComponents.value[type] = arr
+    }
     return {
+      udfComponents,
       checkFoldMenu,
       toolbarList,
       funcList,
@@ -125,6 +132,7 @@ export default {
       updateNecessaryConfigForm,
       updateIsTable,
       updateApiForm,
+      updateUdfComponents,
       fold,
     };
   },
@@ -150,9 +158,11 @@ export default {
     },
     async exportCode() {
       const configObj = this.propObj
+      const components = this.udfComponents.func.concat(this.udfComponents.dataTable).concat(this.udfComponents.dialog)
+      debugger
       const _this = this
        axios
-      .post("http://127.0.0.1:3012/table",{configObj},{
+      .post("http://127.0.0.1:3012/table",{configObj,components},{
         headers:{
                 'X-Requested-With': 'XMLHttpRequest',
                 "Access-Control-Allow-Origin": "*"
