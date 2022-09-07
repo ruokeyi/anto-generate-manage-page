@@ -6,7 +6,7 @@ const timeString = new Date().toLocaleDateString().replace(/\//g, '-'); // 日�
 function compress(target,outputName) {
 
   //配置要打包的路径列表,需要打包某些目录，添加到数组里面即可 相对路径
-  // 默认在桌面生成此文件 table-data+日期.zip
+  // 默认在桌面生成此文件 outputName+日期.zip
   const output = fs.createWriteStream(homedir + `/Desktop/${outputName}${timeString}.zip`);
   const archive = archiver('zip', {
     zlib: { level: 9 } // 设置压缩级别
@@ -20,7 +20,7 @@ function compress(target,outputName) {
     console.log(`
     --------- ---------压缩完毕--------- ---------
     生成文件大小${(archive.pointer() / 1024 / 1024).toFixed(1)}MB
-    请在桌面查找activity-ui${timeString}.zip
+    请在桌面查找${outputName}${timeString}.zip
     ---------如需配置生成路径或文件名,请配置output---------
     `);
   });

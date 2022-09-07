@@ -265,7 +265,7 @@
           /></el-icon>
         </el-form-item>
       </el-form>
-      <span>API相关</span>
+      <span class="mgt20 crm-txtc-primary">API相关</span>
       <div class="fr ac form-wrapper">
         接口基础路径填写
           <el-radio-group v-model="useApiPath" size="small">
@@ -314,12 +314,13 @@
       </el-button-group>
       <div
         style="
-          margin-top: 20px;
           border: 1px dashed #c0bdbd;
           border-radius: 12px;
-          height: 60%;
+          position: fixed;
+          top: 172px;
         "
       >
+        <span class="mg12 crm-txtc-primary">配置参数面板</span>
         <empty-state
           v-if="!currentParam"
           :width="'200px'"

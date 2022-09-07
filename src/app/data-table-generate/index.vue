@@ -175,13 +175,7 @@ export default {
     },
     async copyComponent() {
       const _this = this
-       axios
-      .get("http://127.0.0.1:3012/table/getTableComponent",{
-        headers:{
-                'X-Requested-With': 'XMLHttpRequest',
-                "Access-Control-Allow-Origin": "*"
-            }
-      })
+       axios.get("http://127.0.0.1:3012/table/copy")
       .then(function (response) {
        if(response.data.code===0){
           _this.$message.success("下载成功，请到桌面查看～");

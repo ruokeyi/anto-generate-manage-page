@@ -36,7 +36,7 @@
       </el-form-item>
     </div>
     <div v-if="areaType === 'dataTable'">
-      <data-table-params v-model:params="formData" @updateParams="updateParams" />
+      <data-table-params :params="formData" @updateParams="updateParams" />
     </div>
     <div v-if="areaType === 'func'">
       <func-params :params="formData" @updateParams="updateParams" />
@@ -56,6 +56,7 @@ import DataTableParams from "./data-table.params.vue";
 import DialogParams from "./dialog.params.vue";
 import FuncParams from "./func.params.vue";
 import ToolbarParams from "./toolbar.params.vue";
+import {cloneDeep} from 'lodash'
 export default {
   emits: ["updateBaseParams"],
   props: {

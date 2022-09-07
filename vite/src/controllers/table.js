@@ -4,7 +4,7 @@
 class tableCtrl{
   getTableComponent(ctx){
     try{
-      compress(['src/components/crm-data-table'],'table-component')
+      compress(['src/components/crm-data-table/components','src/components/crm-data-table'],'table-component')
       ctx.body = {meassage:'执行成功',code: 0}
     } catch(e){
       ctx.body = {meassage:e,code: -1}

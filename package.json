@@ -6,7 +6,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "start": "vite",
-    "server": "nodemon"
+    "server": "node ./vite/bin/entry.js"
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
