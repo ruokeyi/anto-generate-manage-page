@@ -37,6 +37,7 @@ import './assets/iconfont-crm/iconfont.css';
 import './dev-conf.ts';
 // 富文本静态资源引入
 import "./statics/index";
+// test update
 
 app.use(ContextMenu)
   .use(Antd as any)
