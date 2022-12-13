@@ -4,7 +4,7 @@ const cors = require("koa2-cors");//导入跨域模块
 // 定义允许跨域的origin
 const allowOrigins = [
   // "http://local:8065",
-  "http://up-profit.bilibili.co/"
+  "http://up-profit.bibi.co/"
 ];
 app.use(cors({
   origin: function(ctx) {

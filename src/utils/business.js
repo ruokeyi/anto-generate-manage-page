@@ -1,6 +1,6 @@
 // 通用业务方法
 const baseUpDetailUri = `/york/crm-data-platform/#/data-platform/up-analyze`
-const upSpaceUrl = `https://space.bilibili.com/`
+const upSpaceUrl = `https://space.bibi.com/`
 
 /**
  * 根据mid 或uid 拼接up主profile页的url

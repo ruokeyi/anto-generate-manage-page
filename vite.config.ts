@@ -11,7 +11,7 @@ function pathRewritePlugin() {
     name: 'm-path-rewrite',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        req.url = req.url.replace(/.*bilibili\.co/, '');
+        req.url = req.url.replace(/.*bibi\.co/, '');
         next();
       });
     },
@@ -29,7 +29,7 @@ let prefix = isUat
   ? 'uat-'
   : '';
 export let basePath = inProd
-  ? `//${prefix}boss.bilibili.co/york/york/${projectName}/`
+  ? `//${prefix}boss.bibi.co/york/york/${projectName}/`
   : 'york/generate-data-table';
 
 

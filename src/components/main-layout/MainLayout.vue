@@ -293,7 +293,7 @@ export default defineComponent({
       }),
       drawerMenuVisible: ref(false),
       logout() {
-        location.href = 'https://dashboard-mng.bilibili.co/logout'
+        location.href = 'https://www.baidu.com'
       }
     }
   },

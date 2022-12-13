@@ -32,7 +32,7 @@ http.interceptors.request.use(
     config.withCredentials = true;
     // 方便mock
     if (config.mockId) {
-      config.baseURL = config.baseURL?.replace(host, `bapi.bilibili.co/mock/${config.mockId}`);
+      config.baseURL = config.baseURL?.replace(host, `bapi.bibi.co/mock/${config.mockId}`);
     }
     return config;
   },
@@ -44,7 +44,7 @@ export async function reLogin() {
     title: '提醒',
     content: '您尚未登录或者登录信息残缺，即将为您打开新窗口，重新登录dashboard......',
     onOk: async () => {
-      window.open('https://dashboard-mng.bilibili.co/logout');
+      window.open('https://dashboard-mng.bibi.co/logout');
       Modal.info({
         title: '提醒',
         content: '请刷新......',

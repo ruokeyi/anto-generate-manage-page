@@ -30,7 +30,7 @@
                class="avatar-placeholder">
             {{ placeholder }}
           </div>
-          <a v-else :href="`https://space.bilibili.com/${data[mid]}/`" target="_blank">
+          <a v-else :href="`https://space.bibi.com/${data[mid]}/`" target="_blank">
             <div class="avatar" style="border: 0;">
               <img
                   :src="data[avatar]" @load="imgLoad"
